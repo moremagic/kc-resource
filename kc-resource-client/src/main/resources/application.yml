@@ -1,0 +1,7 @@
+server.port: 28080
+
+keycloak:
+  realm: kc-resource
+  resource: kc-resource-client
+  auth-server-url: http://127.0.0.1:8080/auth
+
