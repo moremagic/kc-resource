@@ -26,3 +26,9 @@ $ java -jar ./kc-resource-client/target/kc-resource-client-1.0.0-SNAPSHOT.jar
 - Resource Client: http://localhost:28080/
   - Admin Role: http://localhost:28080/kc/resource/client/admin
   - User Role: http://localhost:28080/kc/resource/client/user
+
+# Try testing one of the submodules
+
+```
+$ ./mvnw clean test -pl kc-resource-server
+```
