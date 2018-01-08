@@ -1,0 +1,13 @@
+{
+  "name": "kc-resource-client",
+  "version": "1.0.0",
+  "author": "yo1000",
+  "license": "MIT",
+  "description": "",
+  "scripts": {
+    "http": "http-server -o -p 28081"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
