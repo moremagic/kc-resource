@@ -16,6 +16,8 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
@@ -69,6 +71,16 @@ class KcSecurityConfiguration: KeycloakWebSecurityConfigurerAdapter() {
                 .antMatchers("/kc/resource/server/admin").hasRole("ADMIN")
                 .antMatchers("/kc/resource/server/user").hasRole("USER")
                 .anyRequest().permitAll()
+                .and()
+                .cors()
+                .configurationSource(UrlBasedCorsConfigurationSource().apply {
+                    registerCorsConfiguration("/**", CorsConfiguration().apply {
+                        addAllowedHeader(CorsConfiguration.ALL)
+                        addAllowedMethod("GET")
+                        addAllowedOrigin("http://127.0.0.1:28081")
+                        allowCredentials = true
+                    })
+                })
     }
 }
 
