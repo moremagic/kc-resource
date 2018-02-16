@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- log4jdbc-log4j2 -->
+    <logger name="jdbc.sqlonly"         level="DEBUG"/>
+    <logger name="jdbc.sqltiming"       level="INFO"/>
+    <logger name="jdbc.audit"           level="INFO"/>
+    <logger name="jdbc.resultset"       level="ERROR"/>
+    <logger name="jdbc.resultsettable"  level="ERROR"/>
+    <logger name="jdbc.connection"      level="DEBUG"/>
+
+    <!-- Spring -->
+    <logger name="org.springframework.web.servlet.mvc.support" level="DEBUG"/>
+    <logger name="com.fasterxml.jackson.databind" level="DEBUG"/>
+
+    <!-- app -->
+    <logger name="com.yo1000.keycloak.resource.server" level="DEBUG"/>
+</configuration>
