@@ -55,9 +55,10 @@ class KcSecurityConfiguration: KeycloakWebSecurityConfigurerAdapter() {
     }
 
     override fun keycloakAuthenticationProvider(): KeycloakAuthenticationProvider {
-        val provider = super.keycloakAuthenticationProvider()
-        provider.setGrantedAuthoritiesMapper(grantedAuthoritiesMapper())
-        return provider
+        return KeycloakAuthenticationUserProvider(
+                grantedAuthoritiesMapper(),
+                IdOnlyAuthenticationUserRepository()
+        )
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {

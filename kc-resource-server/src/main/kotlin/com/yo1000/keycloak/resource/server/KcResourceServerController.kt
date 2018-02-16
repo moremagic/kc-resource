@@ -8,13 +8,19 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/kc/resource/server")
 class KcResourceServerController {
     @GetMapping("/admin")
-    fun getAdminResource(): String {
-        return "ADMIN Resource!!"
+    fun getAdminResource(userToken: KeycloakAuthenticationUserToken<String>): String {
+        return """
+            ADMIN Resource!!
+            ${userToken.toString().replace(";", "\n")}
+            """.trimIndent()
     }
 
     @GetMapping("/user")
-    fun getUserResource(): String {
-        return "USER Resource."
+    fun getUserResource(userToken: KeycloakAuthenticationUserToken<String>): String {
+        return """
+            USER Resource.
+            ${userToken.toString().replace(";", "\n")}
+            """.trimIndent()
     }
 }
 
