@@ -84,6 +84,8 @@ class SecurityConfiguration : KeycloakWebSecurityConfigurerAdapter() {
                 .authorizeRequests()
                 .antMatchers("/kc/resource/client/user").hasRole("USER")
                 .antMatchers("/kc/resource/client/admin").hasRole("ADMIN")
+                .antMatchers("/kc/resource/client/users/**").hasRole("ADMIN")
+                .antMatchers("/kc/resource/client/test").fullyAuthenticated()
                 .anyRequest().permitAll()
     }
 }
