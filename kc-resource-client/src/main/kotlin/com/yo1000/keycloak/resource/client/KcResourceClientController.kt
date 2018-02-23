@@ -3,6 +3,7 @@ package com.yo1000.keycloak.resource.client
 import org.keycloak.adapters.springboot.KeycloakSpringBootProperties
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken
+import org.keycloak.representations.idm.CredentialRepresentation
 import org.keycloak.representations.idm.UserRepresentation
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
@@ -66,12 +67,37 @@ class KcResourceClientController(
     fun getAdd(@RequestParam("name") name: String): String {
         val user = UserRepresentation()
         user.username = name
+        user.isEnabled = true
+        user.email = "${name}@keycloal.local"
+        user.isEmailVerified = true
+
+
+        var ccc = CredentialRepresentation()
+        ccc.isTemporary = true
+        user.credentials = listOf(ccc)
+
 
         val resp = template.postForObject("${props.authServerUrl}/admin/realms/kc-resource/users", user, String::class.java)
 
         return """
             adduser endpoint
             ${user.username} create.
+            """.trimIndent()
+    }
+
+    @GetMapping("/users/update/{id}")
+    @ResponseBody
+    fun getUpdate(@RequestParam("name") name: String, @PathVariable("id") id: String): String {
+        val user = UserRepresentation()
+        user.id = id
+        user.username = name
+        user.firstName = name
+
+        val resp = template.put("${props.authServerUrl}/admin/realms/kc-resource/users/${id}", user, String::class.java)
+
+        return """
+            update user endpoint
+            ${user.username} update.
             """.trimIndent()
     }
 
