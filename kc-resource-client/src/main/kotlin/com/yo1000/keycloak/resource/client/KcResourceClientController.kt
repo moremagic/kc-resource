@@ -112,6 +112,17 @@ class KcResourceClientController(
             """.trimIndent()
     }
 
+    @GetMapping("/users/verify/{id}")
+    @ResponseBody
+    fun getVerify(@PathVariable("id") id: String): String {
+        val resp = template.put("${props.authServerUrl}/admin/realms/kc-resource/users/${id}/send-verify-email", String::class.java)
+
+        return """
+            verify endpoint
+            ${id}
+            """.trimIndent()
+    }
+
     @GetMapping("/test")
     @ResponseBody
     fun getTest(token: KeycloakAuthenticationToken): String {
